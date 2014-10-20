@@ -1,4 +1,4 @@
 Using grep:
-1. ruby grep.rb --help
-2. chmod +x grep.rb
-   ./grep.rb --help
+1.  chmod +x grep.rb
+2.  alias mygrep='./grep.rb'
+3.  mygrep.rb --help
