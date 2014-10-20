@@ -8,7 +8,6 @@ class Grep
   def initialize
     @options = {}
     @files = []
-    @directories = []
 
     optparse = OptionParser.new do |opts|
       opts.banner = "Usage: ./grep.rb [OPTION]... PATTERN [FILE]..."
@@ -19,12 +18,12 @@ class Grep
       end
 
       @options[:regexp] = nil
-      opts.on("-e", "--regexp=PATTERN", "Use PATTERN for matching") do |option_regexp|
+      opts.on("-e", "--regexp", "Use PATTERN for matching") do |option_regexp|
         @options[:regexp] = option_regexp
       end
 
       @options[:recursive] = nil
-      opts.on("-r", "--recursive", "Recursively search PATTERN in all files in a directory") do |option_recursive|
+      opts.on("-R", "--recursive", "Recursively search PATTERN in all files in a directory") do |option_recursive|
         @options[:recursive] = option_recursive
       end
 
@@ -41,41 +40,40 @@ class Grep
 
     optparse.parse!
 
-    # TODO: May save all in files directories
-    # and then check flag ":recursive"
-    # File.exists? or File.exist?
-    if @options[:recursive]
-      ARGV.map { |line| @directories.push(line) if File.directory?(line) }
-      @directories.each { |dir| ARGV.delete(dir) }
-    else
-      ARGV.map { |line| @files.push(line) if File.file?(line) }
-      @files.each { |file| ARGV.delete(file) }
-    end
-    # TODO: May use options[:regexp] without PATTERN
-    # then @pattern = ARGV
-    if @options[:regexp]
-      @pattern = @options[:regexp]
-    else
-      @pattern = ARGV
-    end
+    ARGV.map { |line| @files.push(line) if File.exist?(line) }
+    @files.each { |file| ARGV.delete(file) }
+
+    @pattern = ARGV.join
   end
 
   def run
-
     @files.each do |item|
+      if File.directory?(item) && @options[:recursive]
+        # binding.pry
+        Dir.foreach(item) { |file| open_file("#{item}/#{file}") }
+      else
+        open_file(item)
+      end
+    end
+
+  end
+
+  def open_file(item)
+    if File.file?(item)
       File.open(item, "r+") do |file|
         lines = IO.readlines(file)
         lines.each_with_index do |line, index|
+          # TODO: rework all using REGEX
           if @options[:regexp]
-            reg = Regexp.new(@options[:regexp])
-            line.match(reg) { |match| print_lines(lines, index) }
-          elsif line.include?(@pattern.join)
+            reg = Regexp.new(@pattern)
+            # binding.pry
+            line.match(reg) { print_lines(lines, index) }
+          elsif line.include?(@pattern)
             print_lines(lines, index)
           end
         end
       end
     end
-
   end
 
   def print_lines(lines, index)
