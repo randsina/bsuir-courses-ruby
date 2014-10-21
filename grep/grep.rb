@@ -18,17 +18,14 @@ class Grep
         @options[:context] = option_after_context
       end
 
-      @options[:regexp] = nil
       opts.on("-e", "--regexp", "Use PATTERN for matching") do |option_regexp|
         @options[:regexp] = option_regexp
       end
 
-      @options[:recursive] = nil
       opts.on("-R", "--recursive", "Recursively search PATTERN in all files in a directory") do |option_recursive|
         @options[:recursive] = option_recursive
       end
 
-      @options[:gzipped] = nil
       opts.on("-z", "--gzipped", "Search PATTERN in compressed file") do |option_compressed|
         @options[:gzipped] = option_compressed
       end
