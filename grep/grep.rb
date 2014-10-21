@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'pry'
-require "optparse"
+require 'optparse'
+require 'zlib'
 
 class Grep
 
@@ -49,7 +50,6 @@ class Grep
   def run
     @files.each do |item|
       if File.directory?(item) && @options[:recursive]
-        # binding.pry
         Dir.foreach(item) { |file| open_file("#{item}/#{file}") }
       else
         open_file(item)
@@ -61,12 +61,16 @@ class Grep
   def open_file(item)
     if File.file?(item)
       File.open(item, "r+") do |file|
-        lines = IO.readlines(file)
+        if @options[:gzipped]
+          gz = Zlib::GzipReader.new(file)
+          lines = gz.readlines
+        else
+          lines = IO.readlines(file)
+        end
         lines.each_with_index do |line, index|
           # TODO: rework all using REGEX
           if @options[:regexp]
             reg = Regexp.new(@pattern)
-            # binding.pry
             line.match(reg) { print_lines(lines, index) }
           elsif line.include?(@pattern)
             print_lines(lines, index)
