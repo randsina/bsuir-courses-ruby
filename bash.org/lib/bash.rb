@@ -3,23 +3,25 @@ class Bash
     @agent = Mechanize.new
     @quotes = []
     @site = site
+    @count_pages = count_pages
   end
 
   def run
     next_page = ''
-    @agent.get(@site + next_page) do |page|
-      #current_page = page.parser.css('[class="page"]').attr('value').text.to_i
-      #pp current_page
-      page.parser.css('div.quote').each do |quote|
-        name = quote.search("[class='id']").children.text
-        rating = quote.search("[class='rating-o']").children.text
-        date = quote.search("[class='date']").children.text
-        text = quote.search("[class='text']").children.text
+    while (@count_pages > 0) do
+      @agent.get("#{@site}#{next_page}") do |page|
+        current_page = page.parser.css('[class="page"]').attr('value').text.to_i
+        page.parser.css('div.quote').each do |quote|
+          name = quote.search("[class='id']").children.text
+          rating = quote.search("[class='rating-o']").children.text
+          date = quote.search("[class='date']").children.text
+          text = quote.search("[class='text']").children.text
 
-        @quotes << { :name => name, :rating => rating, :date => date, :text => text } unless name.empty?
+          @quotes << { :name => name, :rating => rating, :date => date, :text => text } unless name.empty?
+        end
+        next_page = current_page.prev
+        @count_pages = @count_pages.prev
       end
-      #next_page = current_page - 1
-      #pp next_page
     end
     create_xml_file(build_xml.to_xml)
   end
@@ -42,9 +44,8 @@ class Bash
   end
 
   def create_xml_file(xml)
-    File.open("out.xml", "w+") do |file|
+    File.open("output.xml", "w") do |file|
       file.write(xml)
     end
   end
-
 end
