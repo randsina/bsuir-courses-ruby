@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'mechanize'
-require_relative 'lib/bash.rb'
+require_relative 'lib/bash'
 
 count_pages = ARGV[0] ? ARGV[0].to_i : 1
 site = 'http://bash.im/index/'
