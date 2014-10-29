@@ -17,14 +17,16 @@ class Bash
           date = quote.search("[class='date']").children.text
           text = quote.search("[class='text']").children.text
 
-          @quotes << { :name => name, :rating => rating, :date => date, :text => text } unless name.empty?
+          @quotes << {:name => name, :rating => rating, :date => date, :text => text} unless name.empty?
         end
-        next_page = current_page.prev
-        @count_pages = @count_pages.prev
+        next_page = current_page.pred
+        @count_pages = @count_pages.pred
       end
     end
     create_xml_file(build_xml.to_xml)
   end
+
+  private
 
   def build_xml
     builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
