@@ -17,7 +17,7 @@ class Bash
           date = quote.search("[class='date']").children.text
           text = quote.search("[class='text']").children.text
 
-          @quotes << {:name => name, :rating => rating, :date => date, :text => text} unless name.empty?
+          @quotes << {name: name, rating: rating, date: date, text: text} unless name.empty?
         end
         next_page = current_page.pred
         @count_pages = @count_pages.pred
