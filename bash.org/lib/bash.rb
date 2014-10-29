@@ -9,7 +9,7 @@ class Bash
 
   def run
     next_page = ''
-
+    
     @count_pages.times do
       @agent.get("#{@site}#{next_page}") do |page|
         current_page = page.parser.css('[class="page"]').attr('value').text.to_i
