@@ -45,8 +45,6 @@ class Bash
   end
 
   def create_xml_file(xml)
-    File.open('output.xml', 'w') do |file|
-      file.write(xml)
-    end
+    File.open('output.xml', 'w') { |file| file.write(xml) }
   end
 end
