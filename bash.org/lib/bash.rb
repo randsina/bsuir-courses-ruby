@@ -1,5 +1,7 @@
 # Parser of site 'http://bash.im' in XML
 class Bash
+  PARAMS = { name: 'id', rating: 'rating-o', date: 'date', text: 'text' }
+
   def initialize(site, count_pages)
     @agent = Mechanize.new
     @quotes = []
@@ -9,7 +11,7 @@ class Bash
 
   def run
     next_page = ''
-    
+
     @count_pages.times do
       @agent.get("#{@site}#{next_page}") do |page|
         current_page = page.parser.css('[class="page"]').attr('value').text.to_i
@@ -23,25 +25,19 @@ class Bash
   private
 
   def get_quote(page)
-    params = { name: 'id', rating: 'rating-o', date: 'date', text: 'text' }
     page.parser.css('div.quote').each do |quote|
       q = {}
-      params.each_pair { |key, value| q[key] = quote.search("[class='#{value}']").children.text }
+      PARAMS.each_pair { |key, value| q[key] = quote.search("[class='#{value}']").children.text }
       @quotes << q unless q[:name].empty?
     end
   end
 
   def build_xml
-    builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+    Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
       xml.root do
-        xml.Quotes do
+        xml.quotes do
           @quotes.each do |quote|
-            xml.Quote do
-              xml.Name(quote[:name])
-              xml.Rating(quote[:rating])
-              xml.Date(quote[:date])
-              xml.Text(quote[:text])
-            end
+            xml.quote(quote)
           end
         end
       end
