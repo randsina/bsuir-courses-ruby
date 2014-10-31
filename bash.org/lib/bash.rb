@@ -28,7 +28,7 @@ class Bash
     page.parser.css('div.quote').each do |quote|
       q = {}
       PARAMS.each_pair { |key, value| q[key] = quote.search("[class='#{value}']").children.text }
-      @quotes << q unless q[:name].empty?
+      @quotes << q unless q.values.all?(&:empty?)
     end
   end
 
