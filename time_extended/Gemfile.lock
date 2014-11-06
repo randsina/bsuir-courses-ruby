@@ -1,8 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    time_extended (0.0.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  time_extended

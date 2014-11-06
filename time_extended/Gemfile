@@ -1,4 +1,3 @@
 source 'https://rubygems.org'
 
-require 'date'
-require 'time_extended'
+gem 'time_extended'

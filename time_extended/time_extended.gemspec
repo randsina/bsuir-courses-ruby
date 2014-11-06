@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'time_extended'
-  s.version     = '0.0.4'
-  s.date        = '2014-11-06'
+  s.version     = '0.0.5'
+  s.date        = '2014-11-07'
   s.summary     = 'Time extended!'
   s.description = 'A simple gem for extension the Ruby class `DateTime`'
   s.authors     = ['Roman Vakulchik']
