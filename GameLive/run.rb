@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
-require 'matrix'
 require_relative 'lib/live'
 require 'pry'
 
-live = Live.new(50, 50)
-live.run
+live = Live.new(40, 80)
+loop do
+  live.run
+end
