@@ -1,3 +1,5 @@
+require_relative 'cell'
+
 # You must be alive
 class Life
   def initialize(row, col)
