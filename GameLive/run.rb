@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
-require_relative 'lib/live'
-require 'pry'
+require_relative 'lib/life'
 
-live = Live.new(40, 80)
-loop do
-  live.run
-end
+life = Life.new(20, 40)
+life.run

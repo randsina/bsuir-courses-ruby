@@ -1,32 +1,24 @@
 # You must be alive
-class Live
+class Life
   def initialize(row, col)
     @row = row
     @col = col
-    @universe = Array.new(row) { Array.new(col) }
-    fill_array
-    @temp_universe = Array.new(row) { Array.new(col) }
-    reinit
+    @universe = Array.new(row) { Array.new(col) { rand(0..1) }}
+    @temp_universe = @universe.clone
     print_universe
   end
 
   def run
-    one_step
-    sleep 0.1
-    reinit
-    puts "\e[H\e[2J"
-    print_universe
+    loop do
+      one_step
+      @temp_universe = @universe.clone
+      puts "\e[H\e[2J" # system "clear"
+      print_universe
+      sleep 0.2
+    end
   end
 
   private
-
-  def fill_array
-    @universe.each_index do |row|
-      @universe[row].each_index do |col|
-        @universe[row][col] = rand(0..1)
-      end
-    end
-  end
 
   def one_step
     @temp_universe.each_with_index do |vector, row|
@@ -34,14 +26,6 @@ class Live
         live = round(row, col)
         live == 3 && el == 0 && @universe[row][col] = 1
         !(2..3).include?(live) && el == 1 && @universe[row][col] = 0
-      end
-    end
-  end
-
-  def reinit
-    @universe.each_with_index do |vector, row|
-      vector.each_with_index do |el, col|
-        @temp_universe[row][col] = el
       end
     end
   end
