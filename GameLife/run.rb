@@ -2,5 +2,7 @@
 require_relative 'lib/life'
 require_relative 'lib/cell'
 
-life = Life.new(20, 40)
+include Universe
+
+life = Life.new(30, 60)
 life.run

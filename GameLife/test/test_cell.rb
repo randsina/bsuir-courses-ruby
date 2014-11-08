@@ -1,11 +1,8 @@
 require 'minitest/autorun'
-#require 'life'
 require 'cell'
 
 class TestCell < MiniTest::Unit::TestCase
   def setup
-    # little_universe = Array.new(row) { Array.new(col) }
-    # initialize all cells
     @el = Cell.new
   end
 
