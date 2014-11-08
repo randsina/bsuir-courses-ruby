@@ -2,11 +2,12 @@ module Universe
   # Cell for Conway's Game of Life
   class Cell
     attr_accessor :value
-    def initialize
-      @value = rand(0..1)
+
+    def initialize(value = rand(0..1))
+      @value = value if (0..1).include?(value)
     end
 
-    def neighbours(universe, i, j)
+    def self.neighbours(universe, i, j)
       temp = 0
       temp += universe[i - 1][j - 1].value if i > 0 && j > 0
       temp += universe[i][j - 1].value if j > 0
@@ -22,7 +23,7 @@ module Universe
     private
 
     def to_s
-      @value == 1 ? '*' : ' '
+      @value == 1 ? 'O' : ' '
     end
   end
 end
