@@ -1,12 +1,12 @@
 # Extend and simplify Ruby class `DateTime`
 class DateTime
-  def method_missing(method, *args)
+  def method_missing(method)
     options = ''
 
     params = method.to_s.split('')
     params.each do |el|
       options = "#{options}#{el}"
-      options = "#{options} " if el.to_i == 0
+      options = "#{options} " if ('a'..'z').include?(el) || ('A'..'Z').include?(el)
     end
     options = "%#{options.split(' ').join(' %')}"
 
