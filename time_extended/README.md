@@ -22,9 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-* DateTime.now.ymd => strftime("%y %m %d")
-* DateTime.now.Bd => strftime("%B %d")
-* DateTime.now.M3N => strftime("%M %3N")
+```ruby
+require 'date'
+require 'time_extended'
+
+
+DateTime.now.ymd # => strftime("%y %m %d")  => "14 11 06"
+DateTime.now.Bd  # => strftime("%B %d")     => "November 06"
+DateTime.now.M3N # => strftime("%M %3N")    => "51 963"
+```
 
 ## Contributing
 
