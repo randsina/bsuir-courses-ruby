@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'time_extended'
+# Specify your gem's dependencies in time_extended.gemspec
+gemspec

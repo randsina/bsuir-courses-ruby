@@ -1,10 +1,17 @@
+PATH
+  remote: .
+  specs:
+    time_extended (0.0.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    time_extended (0.0.5)
+    rake (10.3.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  time_extended
+  bundler (~> 1.7)
+  rake (~> 10.0)
+  time_extended!

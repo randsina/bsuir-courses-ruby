@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'date'
-require 'time_extended'
+require_relative 'lib/time_extended'
 
 p DateTime.now.ymd                            # => "14 11 06"
 p DateTime.now.Bd                             # => "November 06"

@@ -20,6 +20,6 @@ class TestTimeExtended < Minitest::Test
   end
 
   def test_with_strftime_S24N
-    assert_equal(@date.S24N, @date.strftime("%S %24N"))
+    refute_equal(@date.S21N, @date.strftime("%S %24N"))
   end
 end
