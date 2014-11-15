@@ -1,0 +1,28 @@
+<form id="start" action="start.erb" method="post">
+  Columns:<br>
+  <input type="text" name="columns" value="<%= @browser_game.cols %>">
+  <br>
+  Rows:<br>
+  <input type="text" name="rows" value="<%= @browser_game.rows %>">
+  <br>
+  <input type="button" name="start" value="Start">
+</form>
+
+<form id="next" action="next.erb" method="post">
+  <input type="button" name="next" value="Next">
+  <input type="text" name="times" value="<%= @browser_game.times %>">
+</form>
+
+<form id="reset" action="reset.erb" method="post">
+  <input type="button" name="reset" value="Reset">
+</form>
+
+<table>
+<% @browser_game.universe.each do |vector| %>
+<tr>
+  <% vector.each do |cell| %>
+  <td><%= cell.send(:to_s) %></td>
+  <% end %>
+</tr>
+<% end %>
+</table>
