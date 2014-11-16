@@ -1,0 +1,8 @@
+doctype html
+html
+  head
+    title Conway's game of Life
+    link href="/css/style.css" rel="stylesheet" /
+  body
+    == slim 'slim/_form'.to_sym
+    == slim 'slim/_table'.to_sym if @browser_game

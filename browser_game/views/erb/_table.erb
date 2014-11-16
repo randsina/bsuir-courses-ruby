@@ -1,0 +1,9 @@
+<table>
+<% @browser_game.life.universe.each do |vector| %>
+<tr>
+  <% vector.each do |cell| %>
+  <td><%= cell.send(:to_s) %></td>
+  <% end %>
+</tr>
+<% end %>
+</table>

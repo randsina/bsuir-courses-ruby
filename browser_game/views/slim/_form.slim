@@ -1,0 +1,18 @@
+form#start action="/" method="post"
+  | Columns:
+  br/
+  input name="columns" type="text" value="#{@browser_game ? @browser_game.cols : COLS}" /
+  br/
+  | Rows:
+  br/
+  input name="rows" type="text" value="#{@browser_game ? @browser_game.rows : ROWS}" /
+  br/
+  br/
+  input name="start" type="submit" value="Start" /
+  br/
+  br/
+  input name="next_step" type="submit" value="Next" /
+  input name="times" type="text" value="#{@browser_game ? @browser_game.times : 0}" /
+  br/
+  br/
+  input name="reset" type="submit" value="Reset" /

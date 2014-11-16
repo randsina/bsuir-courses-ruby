@@ -1,0 +1,8 @@
+!!!
+%html
+  %head
+    %title Conway's game of Life
+    %link{:href => "/css/style.css", :rel => "stylesheet"}
+  %body
+    = haml 'haml/_form'.to_sym
+    = haml 'haml/_table'.to_sym if @browser_game
