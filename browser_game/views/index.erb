@@ -1,10 +1,11 @@
-<form id="start" action="/" method="post">
-  Columns:<br>
-  <input type="text" name="columns" value="<%= @browser_game ? @browser_game.cols : COLS %>"><br>
-  Rows:<br>
-  <input type="text" name="rows" value="<%= @browser_game ? @browser_game.rows : ROWS %>"><br><br>
-  <input type="submit" name="start" value="Start"><br><br>
-  <input type="submit" name="next_step" value="Next">
-  <input type="text" name="times" value="<%= @browser_game ? @browser_game.times : 0 %>"><br><br>
-  <input type="submit" name="reset" value="Reset">
-</form>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Conway's game of Life</title>
+    <link rel="stylesheet" href="/css/style.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <%= erb :_form %>
+    <%= erb :_table if @browser_game%>
+  </body>
+</html>
