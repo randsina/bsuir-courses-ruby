@@ -2,6 +2,7 @@ require 'pry'
 require 'sinatra'
 require 'shotgun'
 require 'haml'
+require 'slim'
 
 Dir[File.expand_path("lib/*.rb")].each { |f| require f }
 include Universe
