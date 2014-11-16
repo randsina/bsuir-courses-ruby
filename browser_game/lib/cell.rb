@@ -2,8 +2,6 @@ module Universe
   # Cell for Conway's Game of Life
   class Cell
     attr_accessor :value
-
-    srand 1
     def initialize(value = rand(0..1))
       @value = value if (0..1).include?(value)
     end

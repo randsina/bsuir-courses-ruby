@@ -1,7 +1,10 @@
 module Universe
   # You must be alive
   class Life
+    attr_accessor :universe
+
     def initialize(row, col)
+      srand 42
       @universe = Array.new(row) { Array.new(col) { Cell.new } }
       @temp_universe = @universe.clone
     end
